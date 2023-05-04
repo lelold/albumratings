@@ -1,0 +1,30 @@
+import os, django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "albumratings.settings")
+django.setup()
+from albums.models import Artist, Album
+from django.contrib.auth.models import User
+with open('bd', 'r') as file:
+    lines = file.readlines()
+for i in range(len(lines)):
+    lines[i] = lines[i].rstrip()
+lines = lines[752:]
+print(lines)
+artists_list = []
+albums_dict = {}
+c = 104
+for i in range(len(lines)):
+    if lines[i] == '==':
+        # albums
+        albums_dict[lines[i-7][5:] + '(%20s)' % c] = {'release_year': int(lines[i-5][13:]), 'cover': lines[i-3][6:], 'artist': lines[i-1][7:]}
+        c+=1
+        # artists
+        if lines[i-1][7:] not in artists_list:
+            artists_list.append(lines[i-1][7:])
+User.objects.get(username='figvam')
+#for i in artists_list[82:]:
+    #artist = Artist(name=i)
+    #artist.save()
+#for i in albums_dict.keys():
+    #album = Album(name=i[:-22], artist=Artist.objects.get(name=albums_dict[i]['artist']), release_year=albums_dict[i]['release_year'], cover=albums_dict[i]['cover'])
+    #print(album)
+    #album.save()

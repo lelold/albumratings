@@ -1,0 +1,23 @@
+{% load static %}
+
+<h3><a href="{% url 'albums:index' %}">Go back to main page</a></h3>
+
+{% if auth %}
+    <p>You logged in as <a href="{% url 'albums:profile' user.id %}">{{ user }}</a>. <a href="{% url "albums:logout" %}">Logout</a>?</p>
+{% else %}
+    <p>You are not logged in. <a href="{% url 'albums:login' %}">Login</a> or <a href="{% url 'albums:registration' %}">register</a>?</p>
+{% endif %}
+
+<p>Search: {{ search_req }}</p>
+
+<p><strong>Ratings of <a href="{% url 'albums:profile' user_id %}">{{ user_profile.username }}</a></strong></p>
+<ul>
+{% for rating in ratings %}
+    <li><a href="{% url 'albums:detail' rating.album.id %}">{{rating.album.name}}</a>: {{rating.num}}</li>
+        {% with 'albums/img/'|add:rating.album.cover|add:'.jpg' as album_cover %}
+            <img src="{% static album_cover %}" alt="{{i}}" height="100" width="100">
+        {% endwith %}
+{% empty %}
+    <li>There is no ratings with "{{ search_req }}".</li>
+{% endfor %}
+</ul>

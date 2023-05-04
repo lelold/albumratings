@@ -1,0 +1,22 @@
+2023-01-17 16:15:07.065 MSK [7269] LOG:  starting PostgreSQL 14.6 (Homebrew) on x86_64-apple-darwin22.1.0, compiled by Apple clang version 14.0.0 (clang-1400.0.29.202), 64-bit
+2023-01-17 16:15:07.066 MSK [7269] LOG:  could not bind IPv6 address "::1": Address already in use
+2023-01-17 16:15:07.066 MSK [7269] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-01-17 16:15:07.066 MSK [7269] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2023-01-17 16:15:07.066 MSK [7269] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-01-17 16:15:07.066 MSK [7269] WARNING:  could not create listen socket for "localhost"
+2023-01-17 16:15:07.066 MSK [7269] FATAL:  could not create any TCP/IP sockets
+2023-01-17 16:15:07.067 MSK [7269] LOG:  database system is shut down
+2023-01-23 15:19:54.615 MSK [5591] LOG:  starting PostgreSQL 14.6 (Homebrew) on x86_64-apple-darwin22.1.0, compiled by Apple clang version 14.0.0 (clang-1400.0.29.202), 64-bit
+2023-01-23 15:19:54.617 MSK [5591] LOG:  listening on IPv6 address "::1", port 5432
+2023-01-23 15:19:54.617 MSK [5591] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-01-23 15:19:54.619 MSK [5591] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2023-01-23 15:19:54.623 MSK [5592] LOG:  database system was shut down at 2023-01-23 15:19:45 MSK
+2023-01-23 15:19:54.628 MSK [5591] LOG:  database system is ready to accept connections
+2023-01-23 15:22:36.144 MSK [5601] ERROR:  role "my_user" does not exist
+2023-01-23 15:22:36.144 MSK [5601] STATEMENT:  GRANT CONNECT ON DATABASE albumratings TO my_user;
+2023-01-23 16:10:54.926 MSK [6464] ERROR:  column albums_album.cover does not exist at character 194
+2023-01-23 16:10:54.926 MSK [6464] STATEMENT:  SELECT "albums_album"."id", "albums_album"."name", "albums_album"."artist_id", "albums_album"."release_year", "albums_album"."rating_all", "albums_album"."rating", "albums_album"."rating_num", "albums_album"."cover" FROM "albums_album" WHERE "albums_album"."id" = 1 LIMIT 21
+2023-01-23 16:53:36.951 MSK [5591] LOG:  received smart shutdown request
+2023-01-23 16:53:36.953 MSK [5591] LOG:  background worker "logical replication launcher" (PID 5598) exited with exit code 1
+2023-01-23 16:53:36.953 MSK [5593] LOG:  shutting down
+2023-01-23 16:53:36.959 MSK [5591] LOG:  database system is shut down

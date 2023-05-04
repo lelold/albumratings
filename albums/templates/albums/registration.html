@@ -1,0 +1,21 @@
+<h3><a href="{% url 'albums:index' %}">Go back to main page</a></h3>
+
+{% if error %}
+    <p>{{ error }}</p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Create your account</legend>
+        <label for="username">Username: </label>
+        <input type="text" id="username" name="username">
+        <label for="email">Email: </label>
+        <input type="email" id="email" name="email">
+        <label for="password">Password: </label>
+        <input type="password" id="password" name="password">
+        <label for="r_password">Repeat your password: </label>
+        <input type="password" id="r_password" name="r_password">
+    </fieldset>
+    <input type="submit" name="register">
+</form>

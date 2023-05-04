@@ -1,0 +1,41 @@
+{% load static %}
+
+<h3><a href="{% url 'albums:index' %}">Go back to main page</a></h3>
+
+{% if auth %}
+    <p>You logged in as <a href="{% url 'albums:profile' user.id %}">{{ user }}</a>. <a href="{% url "albums:logout" %}">Logout</a>?</p>
+{% else %}
+    <p>You are not logged in. <a href="{% url 'albums:login' %}">Login</a> or <a href="{% url 'albums:registration' %}">register</a>?</p>
+{% endif %}
+
+{% if error %}
+    <p>{{ error }}</p>
+{% endif %}
+
+<ul>
+    <li><strong>{{album.name}} - <a href="{% url 'albums:artist' album.artist.id %}">{{album.artist.name}}</a></strong></li>
+    {% with 'albums/img/'|add:album.cover|add:'.jpg' as album_cover %}
+        <p><img src="{% static album_cover %}" alt="{{album_cover}}" height="300" width="300"></p>
+    {% endwith %}
+    <li>Rating: {{album.rating}}</li>
+</ul>
+
+<form method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Rate this album</legend>
+        {% if rated %}
+            <input type="radio" name="i" id="i" value="0">
+            <label for="0">Unrate</label><br>
+        {% endif %}
+        {% for i in l %}
+            <input type="radio" name="i" id="i{{forloop.counter}}" value="{{i}}">
+            <label for="i{{forloop.counter}}">{{i}}</label><br>
+        {% endfor %}
+    </fieldset>
+    <input type="submit" value="Vote">
+</form>
+
+{% if rated %}
+    <p>Your rating: {{ rating_num }}</p>
+{% endif %}

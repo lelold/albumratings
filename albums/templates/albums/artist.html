@@ -1,0 +1,26 @@
+{% load static %}
+
+<h3><a href="{% url 'albums:index' %}">Go back to main page</a></h3>
+
+{% if auth %}
+    <p>You logged in as <a href="{% url 'albums:profile' user.id %}">{{ user }}</a>. <a href="{% url "albums:logout" %}">Logout</a>?</p>
+{% else %}
+    <p>You are not logged in. <a href="{% url 'albums:login' %}">Login</a> or <a href="{% url 'albums:registration' %}">register</a>?</p>
+{% endif %}
+
+<ul>
+    <li><p><strong>{{artist.name}}</strong></p></li>
+    {% with 'albums/img/'|add:best_album.cover|add:'.jpg' as album_cover %}
+        <p><img src="{% static album_cover %}" alt="{{album_cover}}" height="300" width="300" ></p>
+    {% endwith %}
+    <h3><a href="{% url 'albums:detail' best_album.id %}">{{best_album.name}}</a></h3>
+</ul>
+<h3>Albums:</h3>
+<ul>
+    {% for i in album_list %}
+        <li><a href="{% url 'albums:detail' i.id %}">{{i.name}}</a>: {{i.rating}}, {{i.release_year}}</li>
+        {% with 'albums/img/'|add:i.cover|add:'.jpg' as album_cover %}
+            <img src="{% static album_cover %}" alt="{{i}}" height="100" width="100">
+        {% endwith %}
+    {% endfor %}
+</ul>
